@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HomeFind – Direct Owner Property Listings</title>
+<meta name="description" content="Find homes directly from owners. No brokers. No commission." />
+
+<!-- Open Graph for Instagram/WhatsApp preview -->
+<meta property="og:title" content="HomeFind – Direct Owner Property Listings" />
+<meta property="og:description" content="Find homes directly from owners. No brokers. No commission." />
+<meta property="og:type" content="website" />
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+  body { background: #f5f7fa; color: #222; line-height: 1.5; }
+
+  header {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: #fff;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  header h1 { font-size: 1.6rem; }
+  header p { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .filters input, .filters select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  .filters button {
+    grid-column: span 2;
+    padding: 10px;
+    background: #1e3a8a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .ad-slot {
+    background: #fff8e1;
+    border: 1px dashed #f0ad4e;
+    text-align: center;
+    padding: 12px;
+    font-size: 0.8rem;
+    color: #888;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #ddd;
+  }
+  .card-body { padding: 12px; }
+  .card-body h3 { font-size: 1.1rem; margin-bottom: 4px; }
+  .price { color: #16a34a; font-weight: 700; font-size: 1.05rem; }
+  .meta { font-size: 0.85rem; color: #555; margin: 6px 0; }
+  .owner { font-size: 0.85rem; color: #333; margin-top: 8px; }
+
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 6px;
+  }
+  .btn.call { background: #3b82f6; }
+  .btn.post {
+    display: block;
+    text-align: center;
+    background: #1e3a8a;
+    margin: 24px 0;
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: #777;
+  }
+  footer a { color: #1e3a8a; text-decoration: none; margin: 0 6px; }
+
+  .affiliate-box {
+    background: #eef2ff;
+    border-left: 4px solid #3b82f6;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin: 16px 0;
+  }
+  .affiliate-box a { color: #1e3a8a; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏠 HomeFind</h1>
+  <p>Direct Owner Listings • No Brokers • No Commission</p>
+</header>
+
+<div class="container">
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search city / locality..." />
+    <select id="bhk">
+      <option value="">All BHK</option>
+      <option value="1">1 BHK</option>
+      <option value="2">2 BHK</option>
+      <option value="3">3 BHK</option>
+      <option value="4">4+ BHK</option>
+    </select>
+    <select id="type">
+      <option value="">Rent / Sale</option>
+      <option value="Rent">Rent</option>
+      <option value="Sale">Sale</option>
+    </select>
+    <input type="number" id="maxPrice" placeholder="Max price (₹)" />
+    <button onclick="renderListings()">🔍 Search</button>
+  </div>
+
+  <!-- AD SLOT 1 -->
+  <div class="ad-slot" id="ad-slot-top">Ad space — paste Google AdSense code here later</div>
+
+  <!-- LISTINGS -->
+  <div id="listings"></div>
+
+  <!-- AFFILIATE BOX -->
+  <div class="affiliate-box">
+    💡 <strong>Moving soon?</strong> Get packers & movers, home cleaning, and internet connection deals —
+    <a href="https://YOUR-AFFILIATE-LINK-HERE" target="_blank" rel="noopener">Check offers →</a>
+  </div>
+
+  <!-- POST PROPERTY BUTTON -->
+  <a class="btn post" href="https://YOUR-GOOGLE-FORM-LINK-HERE" target="_blank" rel="noopener">
+    ➕ Post Your Property (Free)
+  </a>
+
+  <!-- AD SLOT 2 -->
+  <div class="ad-slot" id="ad-slot-bottom">Ad space — paste Google AdSense code here later</div>
+
+</div>
+
+<footer>
+  © <span id="year"></span> HomeFind ·
+  <a href="/about.html">About</a> ·
+  <a href="/privacy.html">Privacy</a> ·
+  <a href="/contact.html">Contact</a>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 🔽 REPLACE THIS DATA with your real listings
+  const properties = [
+    {
+      title: "2 BHK Apartment in Anna Nagar",
+      city: "Chennai",
+      locality: "Anna Nagar",
+      type: "Rent",
+      price: 18000,
+      bhk: 2,
+      area: 950,
+      image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800",
+      owner: "Ramesh",
+      phone: "919999999999"
+    },
+    {
+      title: "3 BHK Independent House",
+      city: "Bangalore",
+      locality: "Whitefield",
+      type: "Sale",
+      price: 8500000,
+      bhk: 3,
+      area: 1600,
+      image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800",
+      owner: "Priya",
+      phone: "918888888888"
+    },
+    {
+      title: "1 BHK Studio near Metro",
+      city: "Mumbai",
+      locality: "Andheri East",
+      type: "Rent",
+      price: 25000,
+      bhk: 1,
+      area: 450,
+      image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800",
+      owner: "Arjun",
+      phone: "917777777777"
+    }
+  ];
+
+  function formatPrice(p, type) {
+    if (type === "Sale") {
+      if (p >= 10000000) return "₹" + (p / 10000000).toFixed(2) + " Cr";
+      if (p >= 100000) return "₹" + (p / 100000).toFixed(2) + " L";
+    }
+    return "₹" + p.toLocaleString("en-IN");
+  }
+
+  function renderListings() {
+    const search = document.getElementById('search').value.toLowerCase().trim();
+    const bhk = document.getElementById('bhk').value;
+    const type = document.getElementById('type').value;
+    const maxPrice = parseInt(document.getElementById('maxPrice').value) || Infinity;
+
+    const filtered = properties.filter(p => {
+      const matchSearch = !search ||
+        p.city.toLowerCase().includes(search) ||
+        p.locality.toLowerCase().includes(search);
+      const matchBhk = !bhk || (bhk === "4" ? p.bhk >= 4 : p.bhk == bhk);
+      const matchType = !type || p.type === type;
+      const matchPrice = p.price <= maxPrice;
+      return matchSearch && matchBhk && matchType && matchPrice;
+    });
+
+    const container = document.getElementById('listings');
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="card"><div class="card-body">
+        <p>No listings match your search. Try different filters.</p></div></div>`;
+      return;
+    }
+
+    container.innerHTML = filtered.map(p => `
+      <div class="card">
+        <img src="${p.image}" alt="${p.title}" loading="lazy" />
+        <div class="card-body">
+          <h3>${p.title}</h3>
+          <div class="price">${formatPrice(p.price, p.type)} ${p.type === "Rent" ? "/ month" : ""}</div>
+          <div class="meta">📍 ${p.locality}, ${p.city} · ${p.bhk} BHK · ${p.area} sqft · ${p.type}</div>
+          <div class="owner">👤 Owner: ${p.owner}</div>
+          <a class="btn" href="https://wa.me/${p.phone}?text=Hi,%20I%20saw%20your%20listing%20on%20HomeFind:%20${encodeURIComponent(p.title)}" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="btn call" href="tel:+${p.phone}">📞 Call</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  renderListings();
+</script>
+
+</body>
+</html>
